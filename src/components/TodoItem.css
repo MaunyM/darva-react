@@ -1,0 +1,8 @@
+.TodoItem .done {
+    text-decoration: line-through;
+}
+
+.TodoItem {
+    text-transform: uppercase;
+    display: flexbox;
+}
