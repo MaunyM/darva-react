@@ -4,6 +4,9 @@ import TodoList from './components/TodoList';
 import Item from './type/Item';
 import TodoContext, { ITodoContext } from './context/TodoContext';
 import TodoForm from './components/TodoForm';
+import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import TodoItem from './components/TodoItem';
+import TodoItemById from './components/TodoItemById';
 
 async function fetchItems(): Promise<Item[]> {
   const response = await fetch('https://api.larus.fr/pwa/post')
@@ -79,8 +82,23 @@ function App() {
   return (
     <TodoContext.Provider value={context}>
       <div className="App">
-        <TodoForm />
-        <TodoList />
+        <Router>
+          <nav>
+            <NavLink exact={true} to={'/'}>Home</NavLink>
+            <NavLink to={'/add'}>Ajouter</NavLink>
+          </nav>
+          <Switch>
+            <Route path={'/add'}>
+              <TodoForm />
+            </Route>
+            <Route path={'/item/:id'}>
+              <TodoItemById />
+            </Route>
+            <Route path={'/'}>
+              <TodoList />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </TodoContext.Provider>
   );

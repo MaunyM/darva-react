@@ -2,6 +2,7 @@ import React from 'react';
 import Item from '../type/Item';
 
 import './TodoItem.css'
+import { Link } from 'react-router-dom';
 
 interface PropsType {
     item: Item;
@@ -17,9 +18,11 @@ function TodoItem({ item, onDone, onUndone }: PropsType) {
     return (
         <div className='TodoItem'>
             <input type="checkbox" onChange={(event) => done(event)} />
-            <span className={item.isDone ? 'done' : ''}>
-                {item.name}
-            </span>
+            <Link to={`item/${item.key}`}>
+                <span className={item.isDone ? 'done' : ''}>
+                    {item.name}
+                </span>
+            </Link>
         </div>
     )
 

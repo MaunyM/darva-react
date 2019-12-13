@@ -1,3 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `[Function]`;
+exports[`renders learn react link 1`] = `
+<div
+  className="App"
+>
+  <nav>
+    <a
+      aria-current="page"
+      className="active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      Home
+    </a>
+    <a
+      aria-current={null}
+      href="/add"
+      onClick={[Function]}
+    >
+      Ajouter
+    </a>
+  </nav>
+  <div
+    className="TodoList"
+  >
+    0
+     à faire
+    <button
+      onClick={[Function]}
+    >
+      Vider la liste
+    </button>
+  </div>
+</div>
+`;

@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
 import Item from '../type/Item';
+import IHistoryProps from '../type/History';
 import TodoContext from '../context/TodoContext';
+import { withRouter } from 'react-router-dom';
 
-function TodoForm() {
+function TodoForm({ history }: IHistoryProps) {
     const [nouvelItem, setNouvelItem] = useState(new Item());
     const { addItem } = useContext(TodoContext);
 
@@ -10,6 +12,7 @@ function TodoForm() {
         e.preventDefault();
         addItem(nouvelItem)
         setNouvelItem(new Item())
+        history.push('');
     }
 
     const nameChange = function (newName: string): void {
@@ -31,4 +34,4 @@ function TodoForm() {
 
 }
 
-export default TodoForm;
+export default withRouter(TodoForm);
