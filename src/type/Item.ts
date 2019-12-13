@@ -1,4 +1,5 @@
 class Item {
+    key?:string
     name:string = ''
     isDone = false
 }

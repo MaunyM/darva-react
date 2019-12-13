@@ -1,44 +1,34 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import Item from '../type/Item';
+import TodoContext from '../context/TodoContext';
 
-interface PropsType {
-    onAddItem: (item: Item) => void
-}
+function TodoForm() {
+    const [nouvelItem, setNouvelItem] = useState(new Item());
+    const { addItem } = useContext(TodoContext);
 
-interface Statetype {
-    nouvelItem: Item
-}
-
-class TodoForm extends React.Component<PropsType, Statetype>  {
-    constructor(props: PropsType) {
-        super(props);
-        this.state = { nouvelItem: new Item() }
-    }
-
-    submit(e:React.FormEvent): void {
+    const submit = function (e: React.FormEvent, addItem: (item: Item) => void): void {
         e.preventDefault();
-        this.props.onAddItem(this.state.nouvelItem)
-        this.setState({ nouvelItem: new Item() })
+        addItem(nouvelItem)
+        setNouvelItem(new Item())
     }
 
-    nameChange(newName: string): void {
-        this.setState((prevState) => ({ nouvelItem: { ...prevState.nouvelItem, name: newName } }))
+    const nameChange = function (newName: string): void {
+        setNouvelItem((prevState) => ({ ...prevState, name: newName }))
     }
 
-    render() {
-        return (
-            <form onSubmit={(e) =>this.submit(e)}>
-                <label>
-                    Description
+    return (
+        <form onSubmit={(e) => submit(e, addItem)}>
+            <label>
+                Description
                     <input
-                        value={this.state.nouvelItem.name}
-                        onChange={(e) => this.nameChange(e.target.value)}
-                    />
-                </label>
-                <input type={'submit'} value={'Ajouter'}></input>
-            </form>
-        )
-    }
+                    value={nouvelItem.name}
+                    onChange={(e) => nameChange(e.target.value)}
+                />
+            </label>
+            <input type={'submit'} value={'Ajouter'}></input>
+        </form>
+    )
+
 }
 
 export default TodoForm;
